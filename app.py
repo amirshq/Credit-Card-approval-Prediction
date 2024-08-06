@@ -88,6 +88,45 @@ merged_df_aggregate = merged_df.groupby('ID').agg({
 }).reset_index()
 
 
+target_one = pd.DataFrame(merged_df_aggregate[merged_df_aggregate['TARGET']==1])
+
+
+#Calculate Information Value (IV) Function
+
+def calc_iv(df, feature, target, pr=False):
+    lst = []
+    df[feature] = df[feature].fillna("NULL")
+
+    for i in range(df[feature].nunique()):
+        val = list(df[feature].unique())[i]
+        lst.append([feature,                                                        # Variable
+                    val,                                                            # Value
+                    df[df[feature] == val].count()[feature],                        # All
+                    df[(df[feature] == val) & (df[target] == 0)].count()[feature],  # Good (think: Fraud == 0)
+                    df[(df[feature] == val) & (df[target] == 1)].count()[feature]]) # Bad (think: Fraud == 1)
+
+    data = pd.DataFrame(lst, columns=['Variable', 'Value', 'All', 'Good', 'Bad'])
+    data['Share'] = data['All'] / data['All'].sum()
+    data['Bad Rate'] = data['Bad'] / data['All']
+    data['Distribution Good'] = (data['All'] - data['Bad']) / (data['All'].sum() - data['Bad'].sum())
+    data['Distribution Bad'] = data['Bad'] / data['Bad'].sum()
+    data['WoE'] = np.log(data['Distribution Good'] / data['Distribution Bad'])
+    
+    data = data.replace({'WoE': {np.inf: 0, -np.inf: 0}})
+
+    data['IV'] = data['WoE'] * (data['Distribution Good'] - data['Distribution Bad'])
+
+    data = data.sort_values(by=['Variable', 'Value'], ascending=[True, True])
+    data.index = range(len(data.index))
+
+    if pr:
+        print(data)
+        print('IV = ', data['IV'].sum())
+
+    iv = data['IV'].sum()
+    print('This variable\'s IV is (*1000):',iv*1000)
+    print(df[feature].value_counts())
+    return iv, data
 
 
 
