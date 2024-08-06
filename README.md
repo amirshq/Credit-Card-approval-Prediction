@@ -29,18 +29,18 @@ To set up this project on your local machine, follow these steps:
    cd credit-card-approval-prediction
 
 # Create a virtual environment (optional but recommended)
-    ```bash
-    python3 -m venv venv
+    
+    `python3 -m venv venv`
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 # Install the required packages
-    ```bash
-    pip install -r requirements.txt
+    
+    `pip install -r requirements.txt`
 
 # USAGE 
 ## Run the script
-    ```bash 
-    python script.py
+    
+    `python script.py`
 
 ## Script Breakdown
 
