@@ -86,3 +86,15 @@ Accuracy
 Recall
 Precision
 F1-score
+
+# License
+MIT License
+
+Copyright (c) 2024 [Amir shahcheraghian]
+
+## Dataset License
+
+The dataset used in this project is sourced from Kaggle and is available at:
+https://www.kaggle.com/datasets/rikdifos/credit-card-approval-prediction
+
+Please refer to the dataset's page for specific licensing terms and usage guidelines.
