@@ -13,8 +13,8 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 
 
-application_record_df = pd.read_csv('/Users/amirshahcheraghian/Desktop/Desktop/PHD ETS/Python Codes/Kaggle /Credit Card Approval Prediction/application_record.csv')
-credit_card_record_df = pd.read_csv('/Users/amirshahcheraghian/Desktop/Desktop/PHD ETS/Python Codes/Kaggle /Credit Card Approval Prediction/credit_record.csv')
+application_record_df = pd.read_csv('/Users/amirshahcheraghian/Credit-Card-approval-Prediction/Data/application_record.csv')
+credit_card_record_df = pd.read_csv('/Users/amirshahcheraghian/Credit-Card-approval-Prediction/Data/credit_record.csv')
 
 print(application_record_df.head())
 print(credit_card_record_df.head())
