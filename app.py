@@ -13,8 +13,11 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 
 
-application_record_df = pd.read_csv('/Users/amirshahcheraghian/Credit-Card-approval-Prediction/Data/application_record.csv')
-credit_card_record_df = pd.read_csv('/Users/amirshahcheraghian/Credit-Card-approval-Prediction/Data/credit_record.csv')
+#application_record_df = pd.read_csv('/Users/amirshahcheraghian/Credit-Card-approval-Prediction/Data/application_record.csv')
+#credit_card_record_df = pd.read_csv('/Users/amirshahcheraghian/Credit-Card-approval-Prediction/Data/credit_record.csv')
+
+application_record_df = pd.read_csv('application_record.csv')
+credit_card_record_df = pd.read_csv('credit_record.csv')
 
 print(application_record_df.head())
 print(credit_card_record_df.head())
@@ -23,7 +26,7 @@ print(credit_card_record_df.head())
 merged_df = pd.merge(application_record_df,credit_card_record_df,how='outer',on='ID')
 
 # Fill NaN values with the previous value
-merged_df.fillna(method='ffill',inplace=True)
+merged_df.ffill(inplace=True)
 
 # Encoding 
 categorical_columns = ['FLAG_OWN_CAR','FLAG_OWN_REALTY','OCCUPATION_TYPE','CODE_GENDER', 'NAME_INCOME_TYPE', 'NAME_EDUCATION_TYPE', 'NAME_FAMILY_STATUS', 'NAME_HOUSING_TYPE']
