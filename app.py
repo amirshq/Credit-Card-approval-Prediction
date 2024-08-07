@@ -16,6 +16,9 @@ from sklearn.ensemble import RandomForestClassifier
 application_record_df = pd.read_csv('/Users/amirshahcheraghian/Desktop/Desktop/PHD ETS/Python Codes/Kaggle /Credit Card Approval Prediction/application_record.csv')
 credit_card_record_df = pd.read_csv('/Users/amirshahcheraghian/Desktop/Desktop/PHD ETS/Python Codes/Kaggle /Credit Card Approval Prediction/credit_record.csv')
 
+print(application_record_df.head())
+print(credit_card_record_df.head())
+
 # Merged two DataFrames
 merged_df = pd.merge(application_record_df,credit_card_record_df,how='outer',on='ID')
 
@@ -130,4 +133,46 @@ def calc_iv(df, feature, target, pr=False):
 
 
 
+feature_names = merged_df.columns[1:]
+iv_list = []
+for col in feature_names:
+    iv, data = calc_iv(merged_df,col,'TARGET')
+    iv_list.append((col,iv))
+
+
+for item in iv_list: 
+    print(f'iv = {iv_list[0]}, data= {iv_list[1]}')
+
+# IV values
+iv = pd.DataFrame(iv_list,columns=['Attribute','IV'])
+filtered_df = iv[iv['IV']>0.02]
+
+# Selected Features
+selected_features = filtered_df['Attribute'].tolist()
+selected_features
+
+
+# # Build Model
+
+x = aggregated_df[filtered_df['Attribute'].tolist()]
+y = target['TARGET']
+
+# Split the data
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.3)
+
+# Apply SMOTE
+smote = SMOTE(random_state=42)
+x_train_res,y_train_res = smote.fit_resample(x_train,y_train)
+
+# ## Random Forest Classifier
+
+Random_forest_model = RandomForestClassifier(random_state=42, class_weight = "balanced")
+Random_forest_model.fit(x_train_res,y_train_res)
+
+y_pred_res = Random_forest_model.predict(x_test)
+
+print(f'Accuracy={accuracy_score(y_test,y_pred_res)}')
+print(f'recall={recall_score(y_test,y_pred_res)}')
+print(f'precision={precision_score(y_test,y_pred_res)}')
+print(f'f1={f1_score(y_test,y_pred_res)}')
 
