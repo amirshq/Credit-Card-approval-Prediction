@@ -28,34 +28,34 @@ To set up this project on your local machine, follow these steps:
    git clone https://github.com/amirshq/Credit-Card-approval-Prediction.git
    cd credit-card-approval-prediction
 
-# Create a virtual environment (optional but recommended)
+2. **Create a virtual environment (optional but recommended)** 
     
     python3 -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-# Install the required packages
+3. **Install the required packages**
     
     pip install -r requirements.txt
 
 # USAGE 
-## Run the script
+1. **Run the script**
     
     python script.py
 
-## Script Breakdown
+2. **Script Breakdown**
 
 The script loads and merges the application and credit card records.
 It fills missing values and encodes categorical features.
 It performs feature selection based on Information Value (IV).
 It trains a Random Forest model to predict credit card approval.
 It evaluates the model using accuracy, recall, precision, and F1-score.
-## Dataset
+# Dataset
 The dataset consists of two CSV files:
 
 application_record.csv: Contains application information of credit card applicants.
 credit_record.csv: Contains credit records of the applicants.
 
-## Features
+# Features
     CODE_GENDER: Gender of the applicant
     FLAG_OWN_CAR: Does the applicant own a car
     FLAG_OWN_REALTY: Does the applicant own a property
@@ -76,10 +76,10 @@ credit_record.csv: Contains credit records of the applicants.
     MONTHS_BALANCE: Balance of months in the credit record
     STATUS: Status of the credit record
 
-## Model
+# Model
 A Random Forest Classifier is used for this project. The model is trained with oversampling using SMOTE to handle class imbalance.
 
-## Evaluation
+# Evaluation
 The model is evaluated using the following metrics:
 
 Accuracy
