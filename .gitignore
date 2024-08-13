@@ -1,1 +1,5 @@
 /Users/amirshahcheraghian/google-cloud-sdk
+# Ignore sensitive files
+*.key
+*.token
+#test
