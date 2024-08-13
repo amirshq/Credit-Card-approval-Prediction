@@ -17,7 +17,7 @@ COPY . .
 COPY Data/application_record.csv /app/application_record.csv
 COPY Data/credit_record.csv /app/credit_record.csv
 # Expose the port the app runs on
-EXPOSE 80
+EXPOSE 8080
 
 # Run the application
 CMD ["python", "app.py"]
