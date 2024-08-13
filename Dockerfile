@@ -21,4 +21,3 @@ EXPOSE 80
 
 # Run the application
 CMD ["python", "app.py"]
-#test
